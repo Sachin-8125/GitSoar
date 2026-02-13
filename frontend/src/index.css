@@ -1,4 +1,77 @@
+/* stylelint-disable at-rule-no-unknown */
 @import "tailwindcss";
+
+/* Define custom colors for Tailwind v4 */
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-400: #e74c3c;
+  --color-danger-500: #e74c3c;
+  --color-danger-600: #e74c3c;
+  --color-danger-700: #e74c3c;
+  --color-danger-800: #e74c3c;
+  --color-danger-900: #e74c3c;
+  
+  --color-danger-400: #e74c3c;
+  --color-danger-500: #e74c3c;
+  --color-danger-600: #e74c3c;
+  --color-danger-700: #e74c3c;
+  --color-danger-800: #e74c3c;
+  --color-danger-900: #e74c3c;
+  /* Dark mode color overrides */
+  /* DISABLED: @custom-variant dark (&:where(.dark, .dark *)); */
+}
+
+/* Test dark mode with simple CSS */
+.dark body {
+  background-color: #111827 !important;
+  color: white !important;
+}
+
+.dark .bg-white {
+  background-color: #1f2937 !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #111827 !important;
+}
+
+/* eslint-enable tailwindcss/no-custom-classname */
 
 @layer base {
   * {
@@ -6,7 +79,7 @@
   }
   
   body {
-    @apply font-sans antialiased text-gray-900 bg-gray-50;
+    @apply font-sans antialiased text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-900;
   }
 }
 
@@ -16,35 +89,35 @@
   }
   
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-md hover:shadow-lg;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-primary-500 shadow-sm;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 focus:ring-primary-500 shadow-sm;
   }
   
   .btn-success {
-    @apply btn bg-success-600 text-white hover:bg-success-700 focus:ring-success-500 shadow-md;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-success-600 text-white hover:bg-success-700 focus:ring-success-500 shadow-md;
   }
   
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden;
   }
   
   .input-field {
-    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-200;
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-200;
   }
   
   .input-field-error {
-    @apply input-field border-danger-500 focus:ring-danger-500 focus:border-danger-500;
+    @apply w-full px-4 py-3 rounded-lg border border-danger-500 focus:ring-2 focus:ring-danger-500 focus:border-danger-500 outline-none transition-all duration-200;
   }
   
   .section-title {
-    @apply text-2xl font-bold text-gray-900 mb-4;
+    @apply text-2xl font-bold text-gray-900 dark:text-white mb-4;
   }
   
   .subsection-title {
-    @apply text-lg font-semibold text-gray-800 mb-2;
+    @apply text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2;
   }
   
   .badge {
@@ -52,19 +125,19 @@
   }
   
   .badge-success {
-    @apply badge bg-success-100 text-success-800;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-800;
   }
   
   .badge-warning {
-    @apply badge bg-warning-100 text-warning-800;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-800;
   }
   
   .badge-danger {
-    @apply badge bg-danger-100 text-danger-800;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-100 text-danger-800;
   }
   
   .badge-info {
-    @apply badge bg-primary-100 text-primary-800;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800;
   }
   
   .score-circle {
@@ -72,11 +145,11 @@
   }
   
   .score-circle-inner {
-    @apply absolute w-24 h-24 rounded-full bg-white flex flex-col items-center justify-center shadow-inner;
+    @apply absolute w-24 h-24 rounded-full bg-white dark:bg-gray-800 flex flex-col items-center justify-center shadow-inner;
   }
   
   .progress-bar {
-    @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden;
+    @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
   }
   
   .progress-bar-fill {
@@ -84,27 +157,27 @@
   }
   
   .metric-card {
-    @apply card p-5 hover:shadow-md transition-shadow duration-200;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-5 hover:shadow-md transition-shadow duration-200;
   }
   
   .insight-card {
-    @apply card p-4 border-l-4;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4;
   }
   
   .insight-card-success {
-    @apply insight-card border-success-500 bg-success-50;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-success-500 bg-success-50 dark:bg-success-900/20;
   }
   
   .insight-card-warning {
-    @apply insight-card border-warning-500 bg-warning-50;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-warning-500 bg-warning-50 dark:bg-warning-900/20;
   }
   
   .insight-card-danger {
-    @apply insight-card border-danger-500 bg-danger-50;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-danger-500 bg-danger-50 dark:bg-danger-900/20;
   }
   
   .insight-card-info {
-    @apply insight-card border-primary-500 bg-primary-50;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20;
   }
 }
 
@@ -176,3 +249,4 @@
     break-before: page;
   }
 }
+/* stylelint-disable at-rule-no-unknown */
