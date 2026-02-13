@@ -47,12 +47,6 @@
   --color-danger-800: #e74c3c;
   --color-danger-900: #e74c3c;
   
-  --color-danger-400: #e74c3c;
-  --color-danger-500: #e74c3c;
-  --color-danger-600: #e74c3c;
-  --color-danger-700: #e74c3c;
-  --color-danger-800: #e74c3c;
-  --color-danger-900: #e74c3c;
   /* Dark mode color overrides */
   /* DISABLED: @custom-variant dark (&:where(.dark, .dark *)); */
 }
@@ -68,6 +62,31 @@
 }
 
 .dark .bg-gray-50 {
+  background-color: #111827 !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: #1f2937 !important;
+}
+
+.dark .bg-gray-200 {
+  background-color: #374151 !important;
+}
+
+.dark section {
+  background-color: #111827 !important;
+}
+
+.dark .section {
+  background-color: #111827 !important;
+}
+
+/* Ensure all content areas get dark background */
+.dark main {
+  background-color: #111827 !important;
+}
+
+.dark .container {
   background-color: #111827 !important;
 }
 
