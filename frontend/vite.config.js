@@ -8,6 +8,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  resolve: {
+    alias: {
+      'animejs': '../../node_modules/animejs/lib/anime.es.js'
+    }
+  },
   server: {
     port: 5173,
     host: true

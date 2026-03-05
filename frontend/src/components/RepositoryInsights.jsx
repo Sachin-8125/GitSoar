@@ -37,17 +37,17 @@ const RepositoryInsights = ({ repositories }) => {
     <div className="card p-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
         <h3 className="subsection-title flex items-center mb-0">
-          <FileText className="w-5 h-5 mr-2 text-primary-500" />
+          <FileText className="w-5 h-5 mr-2 text-teal-400" />
           Repository Insights
         </h3>
         
         {/* Sort Options */}
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
-          <span className="text-sm text-gray-500">Sort by:</span>
+          <span className="text-sm text-dark-400">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="text-sm bg-dark-800 border border-dark-600 text-white rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
           >
             <option value="stars">Stars</option>
             <option value="score">Score</option>
@@ -60,7 +60,7 @@ const RepositoryInsights = ({ repositories }) => {
         {sortedRepos.map((repo) => (
           <div
             key={repo.name}
-            className="border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+            className="border border-dark-600 rounded-lg hover:shadow-md transition-shadow"
           >
             {/* Header */}
             <button
@@ -74,8 +74,8 @@ const RepositoryInsights = ({ repositories }) => {
                   </span>
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-gray-900">{repo.name}</h4>
-                  <div className="flex items-center space-x-3 text-sm text-gray-500">
+                  <h4 className="font-semibold text-white">{repo.name}</h4>
+                  <div className="flex items-center space-x-3 text-sm text-dark-300">
                     <span className="flex items-center">
                       <Star className="w-3.5 h-3.5 mr-1 text-warning-500" />
                       {repo.stars}
@@ -85,7 +85,7 @@ const RepositoryInsights = ({ repositories }) => {
                       {repo.forks}
                     </span>
                     {repo.language && (
-                      <span className="px-2 py-0.5 bg-gray-100 rounded-full text-xs">
+                      <span className="px-2 py-0.5 bg-dark-700 rounded-full text-xs text-white">
                         {repo.language}
                       </span>
                     )}
@@ -99,23 +99,23 @@ const RepositoryInsights = ({ repositories }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="p-2 text-gray-400 hover:text-primary-600 transition-colors"
+                  className="p-2 text-dark-400 hover:text-teal-400 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </a>
                 {expandedRepo === repo.name ? (
-                  <ChevronUp className="w-5 h-5 text-gray-400" />
+                  <ChevronUp className="w-5 h-5 text-dark-400" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-400" />
+                  <ChevronDown className="w-5 h-5 text-dark-400" />
                 )}
               </div>
             </button>
 
             {/* Expanded Details */}
             {expandedRepo === repo.name && (
-              <div className="px-4 pb-4 border-t border-gray-100">
+              <div className="px-4 pb-4 border-t border-dark-700">
                 <div className="pt-3">
-                  <p className="text-sm text-gray-600 mb-3">Insights:</p>
+                  <p className="text-sm text-dark-300 mb-3">Insights:</p>
                   <div className="flex flex-wrap gap-2">
                     {repo.insights.map((insight, index) => (
                       <div
@@ -134,7 +134,7 @@ const RepositoryInsights = ({ repositories }) => {
                   </div>
                   
                   {repo.updatedAt && (
-                    <p className="mt-3 text-xs text-gray-400">
+                    <p className="mt-3 text-xs text-dark-500">
                       Last updated: {new Date(repo.updatedAt).toLocaleDateString()}
                     </p>
                   )}
@@ -146,8 +146,8 @@ const RepositoryInsights = ({ repositories }) => {
       </div>
 
       {repositories.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <FileText className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+        <div className="text-center py-8 text-dark-400">
+          <FileText className="w-12 h-12 mx-auto mb-3 text-dark-600" />
           <p>No repository insights available</p>
         </div>
       )}

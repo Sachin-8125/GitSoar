@@ -47,13 +47,35 @@
   --color-danger-800: #e74c3c;
   --color-danger-900: #e74c3c;
   
-  /* Dark mode color overrides */
+  /* Teal color palette */
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+  
+  /* Dark color palette */
+  --color-dark-50: #f6f7f9;
+  --color-dark-100: #e4e7eb;
+  --color-dark-200: #cbd2d9;
+  --color-dark-300: #9aa5b1;
+  --color-dark-400: #6b7280;
+  --color-dark-500: #4b5563;
+  --color-dark-600: #374151;
+  --color-dark-700: #1f2937;
+  --color-dark-800: #111827;
+  --color-dark-900: #0b0f19;
   /* DISABLED: @custom-variant dark (&:where(.dark, .dark *)); */
 }
 
 /* Test dark mode with simple CSS */
 .dark body {
-  background-color: #111827 !important;
+  background-color: #0b0f19 !important;
   color: white !important;
 }
 
@@ -61,24 +83,10 @@
   background-color: #1f2937 !important;
 }
 
-.dark .bg-gray-50 {
-  background-color: #111827 !important;
-}
-
-.dark .bg-gray-100 {
-  background-color: #1f2937 !important;
-}
-
-.dark .bg-gray-200 {
-  background-color: #374151 !important;
-}
-
-.dark section {
-  background-color: #111827 !important;
-}
-
-.dark .section {
-  background-color: #111827 !important;
+.dark .bg-gray-50,
+section,
+.section {
+  background-color: #0b0f19 !important;
 }
 
 /* Ensure all content areas get dark background */
@@ -98,7 +106,8 @@
   }
   
   body {
-    @apply font-sans antialiased text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-900;
+    @apply font-sans antialiased text-gray-900 dark:text-white dark:bg-dark-900;
+    background-color: #0b0f19;
   }
 }
 
@@ -108,7 +117,7 @@
   }
   
   .btn-primary {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-md hover:shadow-lg;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500 shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
@@ -119,12 +128,20 @@
     @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-success-600 text-white hover:bg-success-700 focus:ring-success-500 shadow-md;
   }
   
+  .btn-teal {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500 shadow-md;
+  }
+  
+  .btn-dark {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-dark-800 text-white hover:bg-dark-900 focus:ring-dark-500 shadow-md;
+  }
+  
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden;
+    @apply bg-dark-800 dark:bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden;
   }
   
   .input-field {
-    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-200;
+    @apply w-full px-4 py-3 rounded-lg border border-dark-600 bg-dark-800 text-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all duration-200;
   }
   
   .input-field-error {
@@ -132,11 +149,11 @@
   }
   
   .section-title {
-    @apply text-2xl font-bold text-gray-900 dark:text-white mb-4;
+    @apply text-2xl font-bold text-white mb-4;
   }
   
   .subsection-title {
-    @apply text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2;
+    @apply text-lg font-semibold text-teal-200 mb-2;
   }
   
   .badge {
@@ -155,20 +172,24 @@
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger-100 text-danger-800;
   }
   
-  .badge-info {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800;
+  .badge-teal {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-100 text-teal-800;
+  }
+  
+  .badge-dark {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-dark-700 text-dark-100;
   }
   
   .score-circle {
-    @apply relative w-32 h-32 rounded-full flex items-center justify-center;
+    @apply relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br from-teal-500 to-dark-800;
   }
   
   .score-circle-inner {
-    @apply absolute w-24 h-24 rounded-full bg-white dark:bg-gray-800 flex flex-col items-center justify-center shadow-inner;
+    @apply absolute w-24 h-24 rounded-full bg-dark-800 flex flex-col items-center justify-center shadow-inner;
   }
   
   .progress-bar {
-    @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+    @apply w-full h-2 bg-dark-700 rounded-full overflow-hidden;
   }
   
   .progress-bar-fill {
@@ -176,37 +197,53 @@
   }
   
   .metric-card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-5 hover:shadow-md transition-shadow duration-200;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-5 hover:shadow-md hover:border-teal-500/30 transition-all duration-200;
   }
   
   .insight-card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4;
   }
   
   .insight-card-success {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-success-500 bg-success-50 dark:bg-success-900/20;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-success-500 bg-success-900/20;
   }
   
   .insight-card-warning {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-warning-500 bg-warning-50 dark:bg-warning-900/20;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-warning-500 bg-warning-900/20;
   }
   
   .insight-card-danger {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-danger-500 bg-danger-50 dark:bg-danger-900/20;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-danger-500 bg-danger-900/20;
   }
   
   .insight-card-info {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden p-4 border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20;
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-teal-500 bg-teal-900/20;
+  }
+  
+  .insight-card-teal {
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-teal-500 bg-teal-900/20;
+  }
+  
+  .insight-card-dark {
+    @apply bg-dark-800 rounded-xl shadow-sm border border-dark-700 overflow-hidden p-4 border-l-4 border-dark-400 bg-dark-900/40;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-success-400;
   }
   
   .bg-gradient-hero {
-    @apply bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900;
+    @apply bg-gradient-to-br from-dark-900 via-teal-900 to-dark-900;
+  }
+  
+  .bg-gradient-green-teal {
+    @apply bg-gradient-to-br from-success-600 to-teal-600;
+  }
+  
+  .bg-gradient-dark {
+    @apply bg-gradient-to-br from-dark-800 to-dark-900;
   }
   
   .animate-count {

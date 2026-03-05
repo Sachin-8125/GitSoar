@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import anime from 'animejs';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import UrlInput from './components/UrlInput';
@@ -20,6 +21,45 @@ function App() {
   const [error, setError] = useState(null);
   const [username, setUsername] = useState('');
   const analyzerRef = useRef(null);
+  const featuresRef = useRef(null);
+  const howItWorksRef = useRef(null);
+  const faqRef = useRef(null);
+
+  // Scroll-triggered animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animateOnScroll = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.animate-card');
+          if (cards.length > 0) {
+            anime({
+              targets: cards,
+              opacity: [0, 1],
+              translateY: [50, 0],
+              scale: [0.95, 1],
+              duration: 800,
+              delay: anime.stagger(100),
+              easing: 'easeOutExpo',
+            });
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+    if (featuresRef.current) observer.observe(featuresRef.current);
+    if (howItWorksRef.current) observer.observe(howItWorksRef.current);
+    if (faqRef.current) observer.observe(faqRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleScrollToAnalyzer = () => {
     analyzerRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -54,14 +94,14 @@ function App() {
         <Hero onScrollToAnalyzer={handleScrollToAnalyzer} />
 
         {/* Analyzer Section */}
-        <section ref={analyzerRef} className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+        <section ref={analyzerRef} className="py-16 bg-dark-900 transition-colors duration-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section Header */}
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-white mb-4">
                 Start Your Analysis
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-dark-300 max-w-2xl mx-auto">
                 Enter a GitHub profile URL to get a comprehensive analysis. 
                 We'll examine public repositories, commit history, and more.
               </p>
@@ -75,15 +115,15 @@ function App() {
 
             {/* Error State */}
             {error && (
-              <div className="mt-8 p-6 bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 rounded-xl animate-fade-in">
+              <div className="mt-8 p-6 bg-danger-900/20 border border-danger-800 rounded-xl animate-fade-in">
                 <div className="flex items-start space-x-3">
                   <AlertCircle className="w-6 h-6 text-danger-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold text-danger-800 dark:text-danger-200">Analysis Failed</h3>
-                    <p className="text-danger-600 dark:text-danger-300 mt-1">{error}</p>
+                    <h3 className="font-semibold text-danger-200">Analysis Failed</h3>
+                    <p className="text-danger-300 mt-1">{error}</p>
                     <button
                       onClick={handleReset}
-                      className="mt-3 text-sm font-medium text-danger-700 dark:text-danger-300 hover:text-danger-800 dark:hover:text-danger-200 flex items-center"
+                      className="mt-3 text-sm font-medium text-danger-300 hover:text-danger-200 flex items-center"
                     >
                       <RefreshCw className="w-4 h-4 mr-1" />
                       Try Again
@@ -98,7 +138,7 @@ function App() {
               <div className="mt-12 space-y-6 animate-fade-in">
                 {/* Action Bar */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h2 className="text-2xl font-bold text-white">
                     Analysis Results
                   </h2>
                   <div className="flex items-center space-x-3">
@@ -132,14 +172,14 @@ function App() {
                 <RepositoryInsights repositories={analysisData.analysis.repositoryInsights} />
 
                 {/* Analysis Footer */}
-                <div className="card p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                <div className="card p-6 bg-dark-800 border border-dark-700">
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="text-center sm:text-left">
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-dark-400">
                         Analysis completed on {new Date(analysisData.analyzedAt).toLocaleString()}
                       </p>
                       {analysisData.cached && (
-                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                        <p className="text-xs text-dark-500 mt-1">
                           Results retrieved from cache
                         </p>
                       )}
@@ -160,13 +200,13 @@ function App() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 bg-white dark:bg-gray-800 transition-colors duration-200">
+        <section ref={featuresRef} id="features" className="py-16 bg-dark-800 transition-colors duration-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-white mb-4">
                 What GitSoar Analyzes
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-dark-300 max-w-2xl mx-auto">
                 Our comprehensive scoring algorithm evaluates your GitHub profile across 
                 six key dimensions that recruiters care about.
               </p>
@@ -213,13 +253,13 @@ function App() {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                  className="animate-card p-6 rounded-2xl bg-teal-900/30 hover:bg-teal-900/40 transition-all duration-300 border border-teal-800/50 hover:scale-105 hover:-translate-y-1 opacity-0"
                 >
                   <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-lg font-semibold text-white mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-dark-300 text-sm">
                     {feature.description}
                   </p>
                 </div>
@@ -229,13 +269,13 @@ function App() {
         </section>
 
         {/* How It Works */}
-        <section id="how-it-works" className="py-16 bg-primary-50 dark:bg-primary-900/20 transition-colors duration-200">
+        <section ref={howItWorksRef} id="how-it-works" className="py-16 bg-dark-900 transition-colors duration-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-white mb-4">
                 How It Works
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-dark-300 max-w-2xl mx-auto">
                 Get your GitHub profile analysis in three simple steps.
               </p>
             </div>
@@ -261,25 +301,25 @@ function App() {
                   icon: '📊'
                 }
               ].map((item, index) => (
-                <div key={index} className="relative">
-                  <div className="card p-6 text-center h-full">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div key={index} className="animate-card relative opacity-0">
+                  <div className="card p-6 text-center h-full bg-teal-900/20 border-teal-800/40 hover:scale-105 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-teal-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl">{item.icon}</span>
                     </div>
-                    <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+                    <div className="w-8 h-8 bg-gradient-to-r from-teal-600 to-success-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
                       {item.step}
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold text-white mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    <p className="text-dark-300 text-sm">
                       {item.description}
                     </p>
                   </div>
                   {index < 2 && (
                     <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                      <div className="w-8 h-8 bg-primary-200 dark:bg-primary-700 rounded-full flex items-center justify-center">
-                        <span className="text-primary-700 dark:text-primary-200">→</span>
+                      <div className="w-8 h-8 bg-teal-800 rounded-full flex items-center justify-center">
+                        <span className="text-teal-200">→</span>
                       </div>
                     </div>
                   )}
@@ -290,10 +330,10 @@ function App() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 bg-white dark:bg-gray-800 transition-colors duration-200">
+        <section ref={faqRef} className="py-16 bg-dark-800 transition-colors duration-200">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-white mb-4">
                 Frequently Asked Questions
               </h2>
             </div>
@@ -321,9 +361,9 @@ function App() {
                   answer: 'Our algorithm is based on industry best practices and recruiter feedback. Scores are objective but should be used as guidance.'
                 }
               ].map((faq, index) => (
-                <div key={index} className="card p-6 dark:bg-gray-700">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{faq.question}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{faq.answer}</p>
+                <div key={index} className="animate-card card p-6 bg-teal-900/30 border-teal-800/50 hover:scale-[1.02] transition-transform duration-300 opacity-0">
+                  <h3 className="font-semibold text-white mb-2">{faq.question}</h3>
+                  <p className="text-teal-100/70 text-sm">{faq.answer}</p>
                 </div>
               ))}
             </div>
