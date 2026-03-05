@@ -5,6 +5,10 @@ node_modules/
 .pnp
 .pnp.js
 
+# Lock files (only ignore nested workspace ones, keep root)
+frontend/package-lock.json
+backend/package-lock.json
+
 # Environment variables
 .env
 .env.local
