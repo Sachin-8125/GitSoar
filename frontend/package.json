@@ -18,7 +18,6 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "recharts": "^3.7.0",
-    "rollup": "^4.40.2",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
@@ -36,11 +35,6 @@
     "node": "20.x"
   },
   "overrides": {
-    "rollup": {
-      "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.40.2",
-        "@rollup/rollup-linux-x64-musl": "4.40.2"
-      }
-    }
+    "rollup": "3.29.5"
   }
 }
