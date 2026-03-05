@@ -12,9 +12,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Security middleware
-app.use(helmet());
-
 // CORS configuration
 // Allow local development plus the deployed frontend (configurable via env)
 const allowedOrigins = [
@@ -23,6 +20,13 @@ const allowedOrigins = [
   'http://localhost:5175',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
+
+// Let Express know it's behind a proxy (Render, etc.) so rate limiting
+// and IP detection work correctly with X-Forwarded-For headers
+app.set('trust proxy', 1);
+
+// Security middleware
+app.use(helmet());
 
 const corsOptions = {
   origin: function (origin, callback) {
