@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import anime from 'animejs';
+import anime from 'animejs/lib/anime.es.js';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import UrlInput from './components/UrlInput';

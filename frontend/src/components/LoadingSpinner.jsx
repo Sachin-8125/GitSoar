@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Loader2, Sparkles, Code2, GitCommit, BarChart3, FileText } from 'lucide-react';
-import anime from 'animejs';
+import anime from 'animejs/lib/anime.es.js';
 
 const LoadingSpinner = ({ username }) => {
   const [progress, setProgress] = useState(0);

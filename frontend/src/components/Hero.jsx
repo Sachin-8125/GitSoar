@@ -1,6 +1,6 @@
 import { Sparkles, BarChart3, FileText, Zap, ArrowDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import anime from 'animejs/lib/anime.es.js';
 
 const Hero = ({ onScrollToAnalyzer }) => {
   const badgeRef = useRef(null);
