@@ -3,21 +3,37 @@
   "version": "1.0.0",
   "description": "GitSoar - GitHub Profile Analyzer Tool for Students",
   "private": true,
+  "type": "module",
   "workspaces": [
     "backend",
     "frontend"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev": "vite",
+    "dev:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build",
+    "build": "vite build",
+    "build:frontend": "cd frontend && npm run build",
+    "preview": "vite preview",
     "start": "cd backend && npm start"
+  },
+  "dependencies": {
+    "animejs": "^3.2.2",
+    "axios": "^1.13.5",
+    "jspdf": "^4.1.0",
+    "lucide-react": "^0.564.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "recharts": "^3.7.0",
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.1",
-    "concurrently": "^8.2.2"
+    "@vitejs/plugin-react": "^5.1.1",
+    "concurrently": "^8.2.2",
+    "vite": "^5.4.14"
   },
   "engines": {
     "node": ">=18.0.0"
